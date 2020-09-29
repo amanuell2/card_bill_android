@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "893403192075",
+    "firebase_url": "https://card-bill-android.firebaseio.com",
+    "project_id": "card-bill-android",
+    "storage_bucket": "card-bill-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893403192075:android:3b89392fbbc92c3670a00e",
+        "android_client_info": {
+          "package_name": "com.example.bill_card"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893403192075-3gqr4bj2f3mib88j2hfn3tb5dudrodhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bill_card",
+            "certificate_hash": "24da7fdd9870bea4241d5824e2c3e3e8f8d7ed05"
+          }
+        },
+        {
+          "client_id": "893403192075-rj29166ibouclortvs51m02cc3j9s2o1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDF3y-Qg6O_Gig6Ke_Qnl645UPXVZepzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893403192075-rj29166ibouclortvs51m02cc3j9s2o1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
