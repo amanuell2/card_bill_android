@@ -1,6 +1,8 @@
 package com.example.bill_card.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bill_card.Model.Product;
 import com.example.bill_card.R;
+import com.example.bill_card.Util.SharedPreferenceUtil;
+import com.google.android.gms.common.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     ArrayList<Product> mProducts = new ArrayList<>();
+    ArrayList<Product> mProductsToShared = new ArrayList<>();
+    Context mContext;
 
     public ProductAdapter(ArrayList<Product> products) {
         mProducts = products;
@@ -25,8 +31,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_row, parent, false);
+        this.mContext = parent.getContext();
+        View view = LayoutInflater.from(mContext).inflate(R.layout.rv_row, parent, false);
 
         return new ProductViewHolder(view);
     }
@@ -51,6 +57,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.itemView.findViewById(R.id.tv_item_price).setVisibility(View.VISIBLE);
         holder.itemView.findViewById(R.id.btn_add).setVisibility(View.VISIBLE);
         holder.bind(product);
+        holder.itemView.findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                product.setItemCount((product.getItemCount() + 1));
+                holder.bind(product);
+                mProductsToShared.add(product);
+                SharedPreferenceUtil.setPreferenceArrayList(mContext, "ORDER", mProductsToShared);
+            }
+        });
+    }
+
+    private void addToCart(Product product) {
     }
 
     @Override
@@ -82,7 +101,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             mTxtPushKey.setText(product.getPushKey());
             mTxtItemName.setText(product.getItemName());
             mTxtItemCount.setText(product.getItemCount().toString());
-            mTxtItemPrice.setText("€"+product.getItemPrice());
+            mTxtItemPrice.setText("€" + product.getItemPrice());
 
 
         }
