@@ -18,6 +18,7 @@ import com.example.bill_card.Util.SharedPreferenceUtil;
 import com.google.android.gms.common.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     ArrayList<Product> mProducts = new ArrayList<>();
@@ -63,8 +64,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 int position = holder.getAdapterPosition();
                 product.setItemCount((product.getItemCount() + 1));
                 holder.bind(product);
-                mProductsToShared.add(product);
-                SharedPreferenceUtil.setPreferenceArrayList(mContext, "ORDER", mProductsToShared);
+
+                ArrayList<Product> products = SharedPreferenceUtil.getPreferenceArrayList(mContext, "ORDER");
+
+                if (products.size() > 0) {
+                    for (Iterator<Product> it = products.iterator(); it.hasNext(); ) {
+                        Product prod = it.next();
+                        if (prod.getPushKey().equals(product.getPushKey())) {
+                            it.remove();
+                        }
+
+                    }
+                    products.add(product);
+                } else {
+                    products.add(product);
+                }
+
+                SharedPreferenceUtil.setPreferenceArrayList(mContext, "ORDER", products);
             }
         });
     }

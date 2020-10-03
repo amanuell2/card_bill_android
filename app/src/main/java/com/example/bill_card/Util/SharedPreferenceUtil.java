@@ -33,7 +33,6 @@ public class SharedPreferenceUtil {
 
     public static void setPreferenceArrayList(Context context, String Key, ArrayList<Product> value) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
-        editor.clear();
         Gson gson = new Gson();
         String jsonValue = gson.toJson(value);
         editor.putString(Key, jsonValue);

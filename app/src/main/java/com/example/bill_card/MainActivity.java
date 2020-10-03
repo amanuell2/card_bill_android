@@ -115,13 +115,9 @@ public class MainActivity extends AppCompatActivity {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    RecyclerView recyclerView = bottomSheet.findViewById(R.id.bill_rv);
+                    RecyclerView recyclerView = findViewById(R.id.bill_rv);
                     Context context = getApplicationContext();
                     ArrayList<Product> products = SharedPreferenceUtil.getPreferenceArrayList(context, "ORDER");
-                    HashSet<Product> hashSet = new HashSet<Product>();
-                    hashSet.addAll(products);
-                    products.clear();
-                    products.addAll(hashSet);
                     final OrderAdapter orderAdapter = new OrderAdapter(products);
                     recyclerView.setAdapter(orderAdapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

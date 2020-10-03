@@ -17,7 +17,7 @@ public class Product implements Parcelable {
     public Product() {
     }
 
-    public Product(String btw_tarif, String foodType, Long itemCount, String itemName, String itemPrice, String itemType, String pushKey,String action,Boolean available) {
+    public Product(String btw_tarif, String foodType, Long itemCount, String itemName, String itemPrice, String itemType, String pushKey, String action, Boolean available) {
         this.setBtw_tarif(btw_tarif);
         this.setFoodType(foodType);
         this.setItemCount(itemCount);
@@ -58,6 +58,14 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
+
+    public boolean equals(Product product) {
+        if (product != null) {
+            return (product.pushKey.equals(this.pushKey) && product.pushKey == this.pushKey);
+        } else {
+            return false;
+        }
+    }
 
     public String getBtw_tarif() {
         return btw_tarif;
@@ -153,4 +161,6 @@ public class Product implements Parcelable {
         parcel.writeString(action);
         parcel.writeByte((byte) (available == null ? 0 : available ? 1 : 2));
     }
+
+
 }
